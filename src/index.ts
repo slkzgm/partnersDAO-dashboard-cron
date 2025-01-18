@@ -10,10 +10,12 @@ import { logger } from "./utils/logger";
  * Main entry point.
  * Connects to DB, runs the job, then closes connections for a clean exit.
  */
+const keywords = process.argv.slice(2);
+
 (async () => {
   try {
     await connectDB();
-    await fetchTweetsJob();
+    await fetchTweetsJob(keywords);
   } catch (err) {
     logger.error("Error running fetchTweetsJob", err);
   } finally {

@@ -5,9 +5,7 @@ import { bulkUpsertUsers } from "../services/user.service";
 import { SearchMode, Tweet } from "agent-twitter-client";
 import { logger } from "../utils/logger";
 
-export const fetchTweetsJob = async () => {
-  const keywords = ["#WeArePartners"];
-
+export const fetchTweetsJob = async (keywords: string[]) => {
   const latestDoc = await getLatestTweet();
   let sinceQuery = latestDoc?.id ? `since_id:${latestDoc.id}` : "";
   const query = `${keywords.join(" ")} ${sinceQuery}`.trim();
